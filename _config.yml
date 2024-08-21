@@ -1,6 +1,6 @@
 lsi: false
 safe: true
-source: manipulation
+# source: manipulation
 incremental: false
 highlighter: rouge
 gist:
