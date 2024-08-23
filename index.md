@@ -1,5 +1,6 @@
 ---
 usemathjax: true
+layout: default
 ---
 
 test document
