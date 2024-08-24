@@ -1,5 +1,5 @@
 ---
-usemathjax: true
+use_math: true
 layout: default
 ---
 
