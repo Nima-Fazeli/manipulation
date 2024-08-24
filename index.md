@@ -1,7 +1,3 @@
----
-layout: posts
-use_math: true
----
 
 test document
 
