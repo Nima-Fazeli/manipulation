@@ -1,3 +1,7 @@
+theme: jekyll-theme-minimal
+title: Introduction to Manipulation Notes
+description: Bookmark this to keep an eye on updates!
+
 plugins:
   - jekyll-relative-links
 relative_links:
@@ -6,4 +10,3 @@ relative_links:
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
-theme: jekyll-theme-tactile
