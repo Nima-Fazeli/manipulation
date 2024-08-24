@@ -1,6 +1,5 @@
 ---
 use_math: true
-layout: default
 ---
 
 test document
