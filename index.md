@@ -1,6 +1,4 @@
----
-layout: base
----
+
 test document
 
 - list
