@@ -3,7 +3,7 @@ test document
 
 - list
 
-Here is an inline one: \\( \sqrt{3x-1}+(1+x)^2 \\) how about \\[ x=y \\] and finally $$ x = z $$.
+Here is an inline one: \\( \sqrt{3x-1}+(1+x)^2 \\) how about \\[ x=y \\] and finally $ x = z $.
 
 **The Cauchy-Schwarz Inequality**
 
