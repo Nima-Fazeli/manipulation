@@ -1,3 +1,4 @@
+theme: cayman
 title: Introduction to Manipulation Notes
 description: Bookmark this to keep an eye on updates!
 
@@ -10,4 +11,3 @@ markdown: kramdown
 kramdown:
   math-engine: mathjax
   syntax_highlighter: rouge
-theme: minima
