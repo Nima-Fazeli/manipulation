@@ -4,7 +4,7 @@ math: true
 ---
 #### [Nima Fazeli](https://www.mmintlab.com/people/nima-fazeli/)
 
-<div style="text-align: right"> &copy Nima Fazeli, 2024 </div>
+<div style="text-align: right"> &copy; Nima Fazeli, 2024 </div>
 <div style="text-align: right"> Last updated: 08-26-2024 </div>
 <div style="text-align: right"> How to cite these note, How to give feedback </div>
 
