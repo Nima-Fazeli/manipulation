@@ -6,7 +6,7 @@ math: true
 
 <div style="text-align: right"> &copy; Nima Fazeli, 2024 </div>
 <div style="text-align: right"> Last updated: 08-26-2024 </div>
-<div style="text-align: right"> [How to cite these note](cite.md), How to give feedback </div>
+<div style="text-align: right"> [How to cite these note](https://github.com/Nima-Fazeli/manipulation/edit/main/cite.md), How to give feedback </div>
 
 <br/><br/>
 
