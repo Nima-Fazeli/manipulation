@@ -1,3 +1,6 @@
+---
+layout: default
+---
 Thank you for citing these notes in your work. Please use the following citation:
 
 @book{manipulation,
