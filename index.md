@@ -1,3 +1,7 @@
+---
+layout: post
+math: true
+---
 
 test document
 
