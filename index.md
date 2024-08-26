@@ -6,9 +6,8 @@ math: true
 
 <div style="text-align: right"> &copy; Nima Fazeli, 2024 </div>
 <div style="text-align: right"> Last updated: 08-26-2024 </div>
-<div style="text-align: right"> How to cite these note, How to give feedback </div>
+<div style="text-align: right"> [How to cite these note](cite.md), How to give feedback </div>
 
-<br/><br/>
 <br/><br/>
 
 **Note**: These are working notes used for [a course being taught at the University of Michigan](https://intro2manipulation.robotics.umich.edu/). They will be updated throughout the Fall 2024 semester. 
