@@ -226,8 +226,83 @@ $$
 \end{align}
 $$
 
-where $\vec{r}=(r_x, r_y)$ is defined just as approach 1. Here, the Jacobian maps the object \textit{twist} 
+where $\vec{r}=(r_x, r_y)$ is defined just as approach 1. Here, the Jacobian maps the object __twist__
 $\dot{\vec{q}} \in \mathbb{R}^3$ (the object's linear and rotational velocities) to the contact point linear 
 velocity $\vec{v_c}\in \mathbb{R}^2$. To understand/derive the final column, consider the velocity of point $C$ 
 when the object undergoes pure rotation about point $O$, the top row is the projection of the velocity vector 
 along $x_w$ and the bottom is for $y_w$. 
+
+**Figure goes here**
+
+Now we make use of the fact that energy (and consequently power) is conserved. If we apply some force 
+$\vec{f}_c$ at point $C$ (represented in the object frame just as approach 1), it will result in a wrench 
+at the COM $\vec{w}_o$. The total power provided by the applied force and resulting object wrench must be equal so we can write:
+
+$$
+\begin{align*}
+    \vec{w}_o \cdot \dot{\vec{q}} = \vec{f}_c \cdot \vec{v}_c  
+\end{align*}
+$$
+
+Now recall that we already derived a relationship between object twist and the velocity of $C$, so we may write:
+
+$$
+\begin{align*}
+    \vec{w}_o \cdot \dot{\vec{q}} = \vec{f}_c \cdot (\mathrm{J}\dot{\vec{q}}) \quad \rightarrow \quad \dot{\vec{q}}^T \vec{w}_o  = \dot{\vec{q}}^T\mathrm{J}^T \vec{f}_c
+\end{align*}
+$$
+
+Since this relationship must hold for all values of $\dot{\vec{q}}$, then we can simplify to:
+
+$$
+\begin{align*}
+    \vec{w}_o  = \mathrm{J}^T\vec{f}_c = \begin{bmatrix} 1 & 0  \\ 0 & 1 \\ -r_y & r_x \end{bmatrix}  \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix}\vec{f}_c =
+    \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \vec{f}_c = \mathrm{J}_c \vec{f}_c
+\end{align*}
+$$
+
+which you'll find is the same expression as we arrived at from approach 1.
+
+To demonstrate the versatility of the second approach, consider the two-link manipulator shown in 
+Fig.~\ref{fig:two-link-tikz}. Let's assume that an external force is applied at point $C$. Our goal is 
+to project this external force into the configuration space of the arm using the contact Jacobian. To compute 
+the contact Jacobian, we write the forward kinematics (location of point $C$ written as a function of the 
+configuration of the arm) and compute the gradient w.r.t. the arm configurations:
+
+$$
+\begin{align*}
+    \vec{r}_c = f(\vec{q}) = \begin{bmatrix} l_1 \cos{\theta_1} & l_1 \cos{\theta_1} + l_2 \cos{(\theta_1+\theta_2)} \\ 
+    l_1 \sin{\theta_1} & l_1 \sin{\theta_1} + l_2 \sin{(\theta_1+\theta_2)}
+    \end{bmatrix} \rightarrow \quad \mathrm{J} = \frac{\partial f(\vec{q})}{ \partial \vec{q}} = \begin{bmatrix} - l_1 \sin{\theta_1} & -l_1 \sin{\theta_1} - l_2 \sin{(\theta_1+\theta_2)} \\ 
+    l_1 \cos{\theta_1} & l_1 \cos{\theta_1} + l_2 \cos{(\theta_1+\theta_2)}
+    \end{bmatrix}
+\end{align*}
+$$
+
+Then the effective torques applied to the joints due to the external force $C$ is:
+
+$$
+\begin{align*}
+    \vec{\tau} = \mathrm{J}^T \vec{f}_c = \mathrm{J}_c \vec{f}_c
+\end{align*}
+$$
+
+where we represent $\vec{f}_c$ in the world frame. You may wonder: "why was $\vec{f}_c$ 
+represented in the object frame for the block example but in the world frame for the two-link manipulator?". 
+This is an astute question. One answer is to note the frame in which we write the total power:
+
+$$
+\begin{align*}
+    \vec{\tau} \cdot \dot{\vec{\theta}} = \vec{f}_c \cdot \vec{v}_c
+\end{align*}
+$$
+
+Since we have chosen to measure the angles and angular rotations of the arm with respect to the 
+world frame, and measure the velocity of point $C$ in the world frame, then $\vec{f}_c$ must 
+also be in the same frame for the dot product to make sense. In the previous example, we represented 
+everything in the object frame. 
+
+**Figure goes here**
+
+Thus far in our discussion, we have not placed any constraints on the force applied through point 
+$C$. However, forces due to contact must satisfy a number of constraints that we will discuss next.
