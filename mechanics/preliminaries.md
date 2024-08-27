@@ -323,3 +323,199 @@ everything in the object frame.
 
 Thus far in our discussion, we have not placed any constraints on the force applied through point 
 $C$. However, forces due to contact must satisfy a number of constraints that we will discuss next.
+
+## Contact Force Constraints -- Unilateral Forces Governed by Coulomb Friction
+
+Perhaps the most fundamental contact constraint states that when two bodies come into contact, the 
+resultant normal force between the objects must ``push'' on the objects to prevent penetration. 
+This force can never pull. The implication of this constraint is that the normal component of the 
+contact force $\vec{f}_c$ must be non-negative:
+
+$$
+\begin{align*}
+    \vec{f}_c =  f_t \vec{t} + f_n \vec{n} \quad \text{such that} \quad f_n \geq 0
+\end{align*}
+$$
+
+There is a small subtlety hidden in this constraint: we assume that $\vec{n}$ is pointing ``into'' 
+the object due to the way that we defined the contact plane and the contact normal. Thus, $f_n \geq 0$ 
+means pushing ``into'' the object. We note that this constraint alone is not the same as non-penetration. 
+It is possible for two bodies to penetrate while still pushing against each other. Towards enforcing 
+non-penetration, first let's denote the distance function between the two bodies with 
+$\psi(\vec{q}) \; : \; \vec{q}\in \mathbb{R}^n \rightarrow \mathbb{R}$. Fig. 6 
+illustrates 2 examples of distance functions between 3 objects. When $\psi >0 $ then the objects are 
+not in contact, while $\psi < 0$ implies penetration. $\psi = 0$ means precise tangency of two objects 
+(they are only just touching). 
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-distances.png" />
+</p>
+<figcaption> 
+  <b>Fig. 6:</b> Example distance functions.
+</figcaption>
+</figure>
+
+With the definition of distance functions, we can now precisely define when a force should be applied by writing:
+
+$$
+\begin{align*}
+    f_n \geq 0, \quad \psi \geq 0, \quad \psi \perp f_n
+\end{align*}
+$$
+
+which states that *either* the distance between the objects is greater than zero, meaning there is 
+no normal force or that the distance is zero, resulting in a normal force greater than zero. These constraints 
+are referred to as a *unilateral* and the specific form presented here is called the Signorini condition 
+for non-penetration. We will discuss in greater detail solutions for interactions that must obey these 
+constraints later in this chapter. Next, we'll turn our attention to the tangential force imparted between the objects.  
+
+We assume that all frictional interactions are governed by Coulomb friction (a.k.a. dry friction). Coulomb 
+friction is a model of the interaction force between two bodies in contact. In this model, the frictional 
+force at the point of contact is proportional to the normal force between the objects. The coefficient of 
+proportionality is referred to as the coefficient of friction, $\mu$. The tangential frictional force is in 
+the contact plane and opposes the relative motion (or tendency of motion) between objects. If there is no 
+relative motion between the objects, then the friction force takes on a value between zero and a maximum 
+determined by the normal force scaled by the coefficient of friction ($ \leq \mu f_n$). If there is relative 
+motion, then the frictional force is equal to the product of the normal force and the coefficient of 
+friction ($ = \mu f_n$). While you may find that some texts make a distinction between the kinetic/dynamic 
+coefficient of friction and its static counterpart, we will ignore this effect and assume they are the same 
+for convenience. The reason for this is that most manipulation tasks operate in the quasi-static or 
+quasi-dynamic regimes that are governed largely by the static coefficient of friction. 
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-point.png" />
+</p>
+<figcaption> 
+  <b>Fig. 7:</b> Point mass in frictional contact with a fixed surface.
+</figcaption>
+</figure>
+
+Consider a point mass in contact with a fixed surface, as depicted in Fig. 7. We can 
+represent the set of forces allowed by the Coulomb friction model as the "friction cone". This cone specifies 
+the set of reaction forces applies to the object from the surface due to contact. The reaction force itself 
+is the sum of the normal and tangential forces applied to the bodies. The friction cone has the following important properties:
+
+- The cone axis is perpendicular to the surface of contact (parallel to the surface's normal),
+- The cone sides make an angle of $\theta = \text{tan}^{-1} \mu$ with the axis.
+
+
+Let's assume the point mass is stationary, if we apply an external force that lies within the friction cone 
+then it is cancelled by the reaction force. A more precise mathematical statement regarding "lies within 
+the friction cone" is to say that if we can find a positive combination of vectors that span the cone such 
+that the sum of the external force and the positive span is a zero vector, then the external force lies within 
+the friction cone. This statement means that friction due from the interaction can resist any force within the 
+friction cone -- which means that the object does not accelerate, implying that it is in sticking contact. 
+
+If we apply an external force that does not lie within the friction cone, then the reaction force can only 
+partially resist it, and the remaining external force imparts an acceleration to the object. This implies that 
+the object moves, either in sliding contact or separation. If the point mass has some initial velocity tangential 
+to the surface, then the reaction force is always on the boundary of the cone and in the direction opposing the 
+relative tangential velocity. This is due to the principle of maximal dissipation, a concept we'll cover later in 
+the notes. Our introduction to the friction cone is for a point mass/point contact model. We will extend these 
+ideas to patch contacts in subsequent sections of the notes.
+
+Consider the extended body depicted in Fig. 8. The friction cone is depicted at the point 
+of contact $C$. The friction cone is the set of all possible reaction forces that can be imparted to the object 
+through frictional interaction. This means that we can use the contact Jacobian to project the friction cone 
+into the wrench space of the object -- referred to as the wrench space friction cone (or the wrench cone for short). 
+We may sum up the effect of multiple contacts projected to the wrench space -- referred to as the composite 
+wrench space friction cone (composite wrench cone for short). 
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-friction-cone.png" />
+</p>
+<figcaption> 
+  <b>Fig. 8:</b> Friction cone for the extended body and it's projection into the object wrench space -- resulting in the composite friction wrench cone.
+</figcaption>
+</figure>
+
+
+## Robot/Finger Jacobians
+
+The Jacobian we described in the previous subsection can be extended to handle multi-link fingers. 
+Consider the hand depicted in Fig. 9. This hand has two fingers each with two links 
+that are actuated. We assume that these fingers make contact at points $C_1$ and $C_2$. In this subsection, 
+our objective is to find the applied contact force given the torques supplied to the joints of the fingers. 
+Recalling from the previous subsection discussion on the Jacobians, we'll use the duality between configuration 
+space velocity and contact points velocity to the derive this Jacobian.
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-finger-jacobian.png" />
+</p>
+<figcaption> 
+  <b>Fig. 9:</b> Fingers of a robot with contact points $C_1$ and $C_2$.cone.
+</figcaption>
+</figure>
+
+Our first step is to relate the joint angles to the contact point locations $C_1$ and $C_2$ in the fixed 
+hand reference frame. This procedure is referred to as forward kinematics. Let's denote the location of the 
+contact points $C_1$ and $C_2$ as $\vec{q}_c=(x_{c1}, y_{c1}, x_{c2}, y_{c2})^T$. We may write:
+
+$$
+\begin{align*}
+    \vec{q}_c = fk(\vec{\theta}) =  \begin{bmatrix} l_1c_1 + l_2 c_{12} + r_{1,x} \\ l_1s_1 + l_2 s_{12} + r_{1,y} \\ l_3c_3 + l_4 c_{34} + r_{2,x} \\ l_3s_3 + l_4 s_{34} + r_{2,y} \end{bmatrix}
+\end{align*}
+$$
+
+where $\vec{\theta}=[\theta_1, \theta_2, \theta_3, \theta_4]^T$, $s_i = \sin(\theta_i)$, 
+$c_i = \cos(\theta_i)$, $s_{ij} = \sin(\theta_i + \theta_j)$, and $c_{ij} = \cos(\theta_i + \theta_j)$. 
+We can calculate the contact point velocity by taking the derivative of this expression w.r.t. to time:
+
+$$
+\begin{align*}
+    \dot{\vec{q}}_c = \frac{\partial fk(\vec{\theta})}{\partial \vec{\theta}}\dot{\vec{\theta}} = \begin{bmatrix} -l_1s_1-l_2s_{12} & -l_2s_{12} & 0 & 0 \\
+    l_1c_1+l_2c_{12} & l_2c_{12} & 0 & 0 \\
+    0 & 0 & -l_3s_3-l_4s_{34} & -l_4s_{34} \\
+    0 & 0 & l_3s_3+l_4s_{34} & l_4c_{34}
+    \end{bmatrix} \dot{\vec{\theta}} = \mathrm{J}^T_f \dot{\vec{\theta}} 
+\end{align*}
+$$
+
+Before applying the duality between force-wrench and velocities, we take a moment to justify it. 
+First, we note that the total amount of power/energy in our system must be conserved. The total amount 
+of power the fingers can exert is:
+
+$$
+\begin{align*}
+    P_f = \vec{\tau}^T \dot{\vec{\theta}}
+\end{align*}
+$$
+
+where $\vec{\tau}$ denotes the joint torques. The total power exerted at the contact points 
+by the externally applied forces is equal to:
+
+$$
+\begin{align*}
+    P_c = \vec{f}^T_c \dot{\vec{q}}_c
+\end{align*}
+$$
+
+Since the input power has to equal the output power, we write:
+
+$$
+\begin{align*}
+    \vec{\tau}^T \dot{\vec{\theta}} = \vec{f}^T_c \dot{\vec{q}}_c
+\end{align*}
+$$
+
+now replacing the relationship we just derived for the Jacobian:
+
+$$
+\begin{align*}
+    \vec{\tau}^T \dot{\vec{\theta}} = \vec{f}^T_c \mathrm{J}^T_f  \dot{\vec{\theta}}
+\end{align*}
+$$
+
+and since this relationship has to hold for all values of $\dot{\vec{\theta}}$ then we can conclude that:
+
+$$
+\begin{align*}
+    \vec{\tau} =  \mathrm{J}_f  \vec{f}_c
+\end{align*}
+$$
+
+This summarizes the application of the duality and derives a relationship between the joint torques and the amount of force produced at the contact points.
