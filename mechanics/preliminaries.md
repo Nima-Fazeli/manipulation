@@ -113,3 +113,28 @@ but the set of admissible configurations objects are allowed to occupy. More on 
 </figure>
 
 ## Contact Frames and Planes
+
+<figure>
+<p align="center">
+  <img src="figures/contact-frames.png" />
+</p>
+<figcaption> 
+  <b>Fig. 3:</b> Reference frames and the contact plane.
+</figcaption>
+</figure>
+
+Consider the object depicted in the left pane of Fig. 3. We will refer to the reference frame 
+attached to it's center of mass (COM) as the object frame. Let's assume that the object makes contact at point $C$ with 
+some other object. We define the contact plane as the plane tangent to both objects, with an example shown in the middle 
+pane of Fig. 3.  We define the contact frame at point $C$ with the following orthogonal axes: 
+
+* the contact normal $\vec{n}$ is specified by the unit vector orthogonal to the contact plane -- the plane passing
+  through the contact frame point tangent to the contacting bodies,
+* the tangent vector $\vec{t}$ lies in the contact plane. In the 2D case, such as the one visualized in left
+  pane of Fig. 3, it is convention to choose $\vec{t}$ such that its cross product into
+  $\vec{n}$ points out of the plane towards us. In 3D, there are always 2 orthogonal tangent vectors and their
+  choice is somewhat arbitrary, right panel of Fig. 3. It is common to choose them such that
+  they either lie along the world frame coordinates or such that they simplify approximations to the contact
+  friction cone (more on this later).
+
+## Force Transmissions and the Contact Jacobian
