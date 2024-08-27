@@ -97,7 +97,7 @@ the absence of any constraints, this system has 24 state s $(12 \times 2)$ bodie
 we have removed a total of 6 degrees of freedom (1 linear and 2 rotational per object). The revolute joints between the 
 ground and the first body, and the first and second body also remove 2 degrees of freedom each. In total, the constraints 
 have removed 10 degrees of freedom, leaving just 2 degrees ($\theta_1, \theta_2$) resulting in a 4 dimensional state-space. 
-We usually represent state with a vector of real numbers and here denote it as $\vec{s}_t \in \mathbf{R}^n$. 
+We usually represent state with a vector of real numbers and here denote it as $\vec{s}_t \in \mathbb{R}^n$. 
 
 Configuration space is a subset of state space that describes the positions of a system **\cite{lozano1990spatial}**. **Fig.~\ref{fig:chap1:conf}** depicts a 2D block in the world frame and its corresponding representation in configuration space. 
 Configuration space is an important concept in robotics and is frequently used to describe not only the position of objects, 
