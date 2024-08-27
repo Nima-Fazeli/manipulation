@@ -15,7 +15,7 @@ math: true
 ### Table of Contents
 
 1. Mechanics of Rigid-Body Frictional Interaction
-    1.1. [Preliminaries](mechanics/preliminaries.md)
+    1. [Preliminaries](mechanics/preliminaries.md)
 3. Perception for Rigid-Body Frictional Interactions
 4. Planning and Controls for Rigid-Body Interaction
 
