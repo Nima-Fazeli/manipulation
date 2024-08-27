@@ -86,3 +86,30 @@ rigid-body assumption.
   and has curves. The effects of space-time curvature are negligible at the scale of manipulation tasks we consider.
 </figcaption>
 </figure>
+
+
+If we constrain the body to the plane and force it to move along a single linear axis, we'd get a system such as the 
+classical 1 dimensional mass-spring-damper system which has 2 states: position of the mass and the velocity of the mass. 
+This example should provide you with the following insight: for each kinematic constraint we add, we usually remove 1 
+degree of freedom which results in a reduction of the state space dimensionality by 2 (the velocity term is also removed). 
+For a more complex example, consider a planar 2-link pendulum, right panel of Fig.~\ref{fig:state-rigid-illustration}. In 
+the absence of any constraints, this system has 24 state s $(12 \times 2)$ bodies in 3D space. By constraining to the plane, 
+we have removed a total of 6 degrees of freedom (1 linear and 2 rotational per object). The revolute joints between the 
+ground and the first body, and the first and second body also remove 2 degrees of freedom each. In total, the constraints 
+have removed 10 degrees of freedom, leaving just 2 degrees ($\theta_1, \theta_2$) resulting in a 4 dimensional state-space. 
+We usually represent state with a vector of real numbers and here denote it as $\myvec{s}_t \in \Real^n$. 
+
+Configuration space is a subset of state space that describes the positions of a system **\cite{lozano1990spatial}**. Fig.~\ref{fig:chap1:conf} depicts a 2D block in the world frame and its corresponding representation in configuration space. 
+Configuration space is an important concept in robotics and is frequently used to describe not only the position of objects, 
+but the set of admissible configurations objects are allowed to occupy. More on this later in the course.
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-config.png" />
+</p>
+<figcaption> 
+  <b>Fig. 2:</b> Visualization of state and configuration space for an object in 2D.
+</figcaption>
+</figure>
+
+## Contact Frames and Planes
