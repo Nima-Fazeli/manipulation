@@ -66,7 +66,7 @@ physically implausible scenarios. We will mostly be ignoring these effects in ou
 
 State is our way of describing everything we need to know about a system to predict it's evolution over time. 
 Any single rigid-body in 3D space (far from contact) has 6 degrees of freedom, 3 linear and 3 rotational, left panel 
-of **Fig.below**. The state vector of this body is composed of its positions and velocities. 
+of Fig. 1. The state vector of this body is composed of its positions and velocities. 
 The state vector can be represented using at least a 12 dimensional vector, with higher dimensional (e.g., 13D) representations 
 offering a number of advantages -- more on this later. This compact representation is a very nice feature of the 
 rigid-body assumption.
@@ -92,14 +92,15 @@ If we constrain the body to the plane and force it to move along a single linear
 classical 1 dimensional mass-spring-damper system which has 2 states: position of the mass and the velocity of the mass. 
 This example should provide you with the following insight: for each kinematic constraint we add, we usually remove 1 
 degree of freedom which results in a reduction of the state space dimensionality by 2 (the velocity term is also removed). 
-For a more complex example, consider a planar 2-link pendulum, right panel of **Fig.~\ref{fig:state-rigid-illustration}**. In 
+For a more complex example, consider a planar 2-link pendulum, right panel of Fig. 1. In 
 the absence of any constraints, this system has 24 state s $(12 \times 2)$ bodies in 3D space. By constraining to the plane, 
 we have removed a total of 6 degrees of freedom (1 linear and 2 rotational per object). The revolute joints between the 
 ground and the first body, and the first and second body also remove 2 degrees of freedom each. In total, the constraints 
 have removed 10 degrees of freedom, leaving just 2 degrees ($\theta_1, \theta_2$) resulting in a 4 dimensional state-space. 
 We usually represent state with a vector of real numbers and here denote it as $\vec{s}_t \in \mathbb{R}^n$. 
 
-Configuration space is a subset of state space that describes the positions of a system **\cite{lozano1990spatial}**. **Fig.~\ref{fig:chap1:conf}** depicts a 2D block in the world frame and its corresponding representation in configuration space. 
+Configuration space is a subset of state space that describes the positions of a system **\cite{lozano1990spatial}**. Fig. 2 
+depicts a 2D block in the world frame and its corresponding representation in configuration space. 
 Configuration space is an important concept in robotics and is frequently used to describe not only the position of objects, 
 but the set of admissible configurations objects are allowed to occupy. More on this later in the course.
 
@@ -186,10 +187,47 @@ To find the total wrench applied to the COM, we simply consolidate the previous 
 
 $$
 \begin{align*}
-    \vec{w} = \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \vec{f}_c = \mat{J}_c \vec{f}_c
+    \vec{w} = \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \vec{f}_c = \mathrm{J}_c \vec{f}_c
 \end{align*}
 $$
 
-where $\mat{J}_c$ is called the contact Jacobian and is responsible for mapping the reaction force expressed 
+where $\mathrm{J}_c$ is called the contact Jacobian and is responsible for mapping the reaction force expressed 
 in the contact frame to the force applied to the object in it's configuration space. The contact Jacobian is an 
 important concept we will revisit consistently in the remainder of these notes.
+
+**Approach 2:** Classically, a Jacobian in mathematics is the matrix you'd get if you took the gradient of a 
+vector-valued function with respect to its arguments. To illustrate, assume that 
+$\vec{x} \in \mathbb{R}^n$ and $\vec{y} \in \mathbb{R}^m$. Let's assume these vectors are related by a function $f$, 
+then the Jacobian is:
+
+$$
+\begin{align*}
+    \vec{y} = f(\vec{x}) \; \rightarrow \quad \frac{\partial \vec y}{\partial \vec x} = \mathrm{J} = \begin{bmatrix} \frac{\partial y_1}{\partial x_1} & \cdot & \frac{\partial y_1}{\partial x_n} \\ \vdots & \ddots & \vdots \\ \frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n} \end{bmatrix}
+\end{align*}
+$$
+
+You may be starting to wonder how this relates  to mapping forces to the COM. We're going to show that the 
+transpose of the Jacobian mapping robot velocities to Cartesian velocities relates external forces to the COM. 
+To see this, consider the block visualized in Fig.~\ref{fig:tikz-block} and note that the position of point $C$ 
+(denoted by $\vec{r}_c$) can be represented by the sum of $\vec{r}_o+\vec{r}$. Let's write this as a function:
+
+$$
+\begin{align*}
+    \vec{r}_c(\vec{q})= f(\vec{q}) = \vec{r}_o+\vec{r} 
+\end{align*}
+$$
+
+where $\vec{q}=(x,y,\theta)$ represents the pose of the object with respect to the origin of the world frame. 
+We can take the time derivative of this expression to compute the velocity of point $C$:
+
+$$
+\begin{align}
+    \vec{v}_c = \frac{d\vec{r}_c(\vec{q})}{dt} = \frac{\partial \vec{r}_c(\vec{q})}{\partial \vec{q}} \frac{d \vec{q}}{dt} = \mathrm{J} \dot{\vec{q}} = \begin{bmatrix} 1 & 0 & -r_y \\ 0 & 1 & r_x \end{bmatrix}  \dot{\vec{q}}
+\end{align}
+$$
+
+where $\vec{r}=(r_x, r_y)$ is defined just as approach 1. Here, the Jacobian maps the object \textit{twist} 
+$\dot{\vec{q}} \in \mathbb{R}^3$ (the object's linear and rotational velocities) to the contact point linear 
+velocity $\vec{v_c}\in \mathbb{R}^2$. To understand/derive the final column, consider the velocity of point $C$ 
+when the object undergoes pure rotation about point $O$, the top row is the projection of the velocity vector 
+along $x_w$ and the bottom is for $y_w$. 
