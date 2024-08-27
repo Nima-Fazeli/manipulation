@@ -232,7 +232,16 @@ velocity $\vec{v_c}\in \mathbb{R}^2$. To understand/derive the final column, con
 when the object undergoes pure rotation about point $O$, the top row is the projection of the velocity vector 
 along $x_w$ and the bottom is for $y_w$. 
 
-**Figure goes here**
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-block-jacobian.png" />
+</p>
+<figcaption> 
+  <b>Fig. 4:</b> The pose of the object with respect to the world reference frame is $\vec{q}=(x,y,\theta)$. 
+  The contact point is denoted by $C$. The vectors $\vec{r}_o$ and $\vec{r}$ point from the origin to the 
+  COM and from the COM to the contact point, respectively.
+</figcaption>
+</figure>
 
 Now we make use of the fact that energy (and consequently power) is conserved. If we apply some force 
 $\vec{f}_c$ at point $C$ (represented in the object frame just as approach 1), it will result in a wrench 
@@ -302,7 +311,15 @@ world frame, and measure the velocity of point $C$ in the world frame, then $\ve
 also be in the same frame for the dot product to make sense. In the previous example, we represented 
 everything in the object frame. 
 
-**Figure goes here**
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-2-link.png" />
+</p>
+<figcaption> 
+  <b>Fig. 5:</b> A two link manipulator with an external force applied at $C$. The configuration of 
+  this system is entirely determined by $\vec{q}=(\theta_1, \theta_2)$
+</figcaption>
+</figure>
 
 Thus far in our discussion, we have not placed any constraints on the force applied through point 
 $C$. However, forces due to contact must satisfy a number of constraints that we will discuss next.
