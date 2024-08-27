@@ -327,7 +327,7 @@ $C$. However, forces due to contact must satisfy a number of constraints that we
 ## Contact Force Constraints -- Unilateral Forces Governed by Coulomb Friction
 
 Perhaps the most fundamental contact constraint states that when two bodies come into contact, the 
-resultant normal force between the objects must ``push'' on the objects to prevent penetration. 
+resultant normal force between the objects must "push" on the objects to prevent penetration. 
 This force can never pull. The implication of this constraint is that the normal component of the 
 contact force $\vec{f}_c$ must be non-negative:
 
@@ -337,9 +337,9 @@ $$
 \end{align*}
 $$
 
-There is a small subtlety hidden in this constraint: we assume that $\vec{n}$ is pointing ``into'' 
+There is a small subtlety hidden in this constraint: we assume that $\vec{n}$ is pointing "into" 
 the object due to the way that we defined the contact plane and the contact normal. Thus, $f_n \geq 0$ 
-means pushing ``into'' the object. We note that this constraint alone is not the same as non-penetration. 
+means pushing "into" the object. We note that this constraint alone is not the same as non-penetration. 
 It is possible for two bodies to penetrate while still pushing against each other. Towards enforcing 
 non-penetration, first let's denote the distance function between the two bodies with 
 $\psi(\vec{q}) \; : \; \vec{q}\in \mathbb{R}^n \rightarrow \mathbb{R}$. Fig. 6 
@@ -453,11 +453,11 @@ space velocity and contact points velocity to the derive this Jacobian.
 
 Our first step is to relate the joint angles to the contact point locations $C_1$ and $C_2$ in the fixed 
 hand reference frame. This procedure is referred to as forward kinematics. Let's denote the location of the 
-contact points $C_1$ and $C_2$ as $\vec{q}_c = [x_{c1}, y_{c1}, x_{c2}, y_{c2}]^T$. We may write:
+contact points $C_1$ and $C_2$ as $\vec{q}_c$. We may write:
 
 $$
 \begin{align*}
-    \vec{q}_c = fk(\vec{\theta}) =  \begin{bmatrix} l_1c_1 + l_2 c_{12} + r_{1,x} \\ l_1s_1 + l_2 s_{12} + r_{1,y} \\ l_3c_3 + l_4 c_{34} + r_{2,x} \\ l_3s_3 + l_4 s_{34} + r_{2,y} \end{bmatrix}
+    \vec{q}_c = \begin{bmatrix} x_{c1} \\ y_{c1} \\ x_{c2} \\ y_{c2} \end{bmatrix} = fk(\vec{\theta}) =  \begin{bmatrix} l_1c_1 + l_2 c_{12} + r_{1,x} \\ l_1s_1 + l_2 s_{12} + r_{1,y} \\ l_3c_3 + l_4 c_{34} + r_{2,x} \\ l_3s_3 + l_4 s_{34} + r_{2,y} \end{bmatrix}
 \end{align*}
 $$
 
