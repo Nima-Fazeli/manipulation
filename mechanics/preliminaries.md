@@ -5,8 +5,8 @@ math: true
 
 The central focus of Robotic Manipulation is the physical interaction between the robot and its environment. 
 At its core, manipulation requires some form of physical contact. There are two questions every robot must answer 
-when reasoning about manipulation: ``what happens when I make contact with my environment?'' and ``how do I choose 
-actions (e.g., contacts and forces) that lead to desired outcomes?''. These question hint at a foundational need 
+when reasoning about manipulation: "what happens when I make contact with my environment?" and "how do I choose 
+actions (e.g., contacts and forces) that lead to desired outcomes?". These question hint at a foundational need 
 for understanding and prediction. The role of contact models is exactly to address these question, i.e. predicting 
 the outcome of the physical interactions and guiding action choices. 
 
@@ -71,6 +71,9 @@ The state vector can be represented using at least a 12 dimensional vector, with
 offering a number of advantages -- more on this later. This compact representation is a very nice feature of the 
 rigid-body assumption.
 
+<figure>
 <p align="center">
   <img src="figures/state-rigid-body.png" />
 </p>
+<figcaption>Fig.1 - States of some exemplar rigid bodies.</figcaption>
+</figure>
