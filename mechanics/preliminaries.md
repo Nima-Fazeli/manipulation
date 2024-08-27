@@ -156,7 +156,7 @@ and for providing intuition, while the second approach generalizes much more eas
 linear external force at point $C$. This force is represented in the object frame as:
 
 $$
-\vec{f}_c =  f_t \boldsymbol t + f_n \vec{n} = \begin{bmatrix} n_y \\ -n_x \end{bmatrix} f_t + \begin{bmatrix} n_x \\ n_y \end{bmatrix} f_n = 
+\vec{f}_c =  f_t \vec{t} + f_n \vec{n} = \begin{bmatrix} n_y \\ -n_x \end{bmatrix} f_t + \begin{bmatrix} n_x \\ n_y \end{bmatrix} f_n = 
  \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix} \begin{bmatrix} f_t \\ f_n \end{bmatrix}
 $$
  
@@ -166,3 +166,30 @@ $\vec{t}$ to re-write $\vec{t}$. The first component represents the tangential f
 the second represents the normal force along the unit normal vector. Next, let's denote the vector pointing from the COM to 
 the contact point with $\vec{r} = (r_x, r_y)$ in the object frame. To compute the effect of this force at the COM we write:
 
+$$
+\begin{aligned}
+    \vec{w}_{n} = \begin{bmatrix}  \vec{n} \\  \vec{r} \times \vec{n} \end{bmatrix} f_n = \begin{bmatrix}  n_x \\ n_y \\  r_xn_y - r_yn_x  \end{bmatrix} f_n 
+\end{aligned}
+$$
+
+where the first two terms are the effect of the linear force translated to the COM and the last term accounts for 
+the moment induced by the force at a distance w.r.t. to the COM. Similarly, the effect of a tangent force of magnitude 
+$f_t$ at the COM is:
+
+$$
+\begin{aligned}
+    \vec{w}_{t} = \begin{bmatrix}  n_y \\ -n_x \\ -r_x n_x - r_y n_y  \end{bmatrix} f_t
+\end{aligned}
+$$
+
+To find the total wrench applied to the COM, we simply consolidate the previous two expressions and write:
+
+$$
+\begin{align*}
+    \vec{w} = \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \vec{f}_c = \mat{J}_c \vec{f}_c
+\end{align*}
+$$
+
+where $\mat{J}_c$ is called the contact Jacobian and is responsible for mapping the reaction force expressed 
+in the contact frame to the force applied to the object in it's configuration space. The contact Jacobian is an 
+important concept we will revisit consistently in the remainder of these notes.
