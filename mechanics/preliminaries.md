@@ -70,3 +70,7 @@ of **Fig.below**. The state vector of this body is composed of its positions and
 The state vector can be represented using at least a 12 dimensional vector, with higher dimensional (e.g., 13D) representations 
 offering a number of advantages -- more on this later. This compact representation is a very nice feature of the 
 rigid-body assumption.
+
+<p align="center">
+  <img src="figures/state-rigid-body.png" />
+</p>
