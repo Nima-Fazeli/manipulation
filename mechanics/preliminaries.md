@@ -75,5 +75,14 @@ rigid-body assumption.
 <p align="center">
   <img src="figures/state-rigid-body.png" />
 </p>
-<figcaption>Fig.1 - States of some exemplar rigid bodies.</figcaption>
+<figcaption> <b>Fig. 1:</b> Illustrative examples of rigid-bodies and their configurations. <b>Left Panel:</b> The 
+  position of a general rigid-object in 3D space (our world) can be specified using 6 numbers with respect to some 
+  inertial reference frame. <b>Middle Panel:</b> The same object, now constrained to move in the 2D plane needs 
+  3 degrees of freedom $(x,y,\theta)$. The planar motion is in fact 3 constraints: $(z=0)$ and that out of plane 
+  rotations are zero too. <b>Right Panel:</b> Two link manipulator example. In general, 2 rigid-objects in the 
+  plane are described by 6 numbers (3 each). However, as noted in the text, the revolute joints trims down the 
+  requirement to just two numbers ($\theta_1, \theta_2$). <b>A fun aside:</b> This discussion assumes that the 
+  rigid-bodies occupy Euclidean 3D space. Our current understanding is that the fabric of space-time is not Euclidean 
+  and has curves. The effects of space-time curvature are negligible at the scale of manipulation tasks we consider.
+</figcaption>
 </figure>
