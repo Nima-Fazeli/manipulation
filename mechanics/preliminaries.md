@@ -153,11 +153,8 @@ the classical notion of Jacobians and relations between velocities. The first ap
 and for providing intuition, while the second approach generalizes much more easily and is easier to implement in code.
 
 **Approach 1:** Let's derive an example of the contact Jacobian for Fig. 3. To start, we assume that we have applied a 
-linear external force at point $C$. This force is represented in the object frame as:
-$$
- \vec{f}_c =  f_t \bm{t} + f_n \vec{n} = \begin{bmatrix} n_y \\ -n_x \end{bmatrix} f_t + \begin{bmatrix} n_x \\ n_y \end{bmatrix} f_n = 
- \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix} \begin{bmatrix} f_t \\ f_n \end{bmatrix}
-$$
+linear external force at point $C$. This force is represented in the object frame as:$$\vec{f}_c =  f_t \boldsymbol t + f_n \vec{n} = \begin{bmatrix} n_y \\ -n_x \end{bmatrix} f_t + \begin{bmatrix} n_x \\ n_y \end{bmatrix} f_n = 
+ \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix} \begin{bmatrix} f_t \\ f_n \end{bmatrix}$$
 where we write the unit normal vector in the object frame as $\vec{n} = (n_x, n_y)$ where the subscripts specify 
 the projection of the vector along the object reference frame axes. Note that we have used the orthogonality of $\vec{n}$ and 
 $\vec{t}$ to re-write $\vec{t}$. The first component represents the tangential force along the unit tangent vector and 
