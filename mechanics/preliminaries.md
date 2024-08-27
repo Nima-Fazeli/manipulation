@@ -453,7 +453,7 @@ space velocity and contact points velocity to the derive this Jacobian.
 
 Our first step is to relate the joint angles to the contact point locations $C_1$ and $C_2$ in the fixed 
 hand reference frame. This procedure is referred to as forward kinematics. Let's denote the location of the 
-contact points $C_1$ and $C_2$ as $\vec{q}_c=(x_{c1}, y_{c1}, x_{c2}, y_{c2})^T$. We may write:
+contact points $C_1$ and $C_2$ as $\vec{q}_c = [x_{c1}, y_{c1}, x_{c2}, y_{c2}]^T$. We may write:
 
 $$
 \begin{align*}
@@ -461,7 +461,7 @@ $$
 \end{align*}
 $$
 
-where $\vec{\theta}=[\theta_1, \theta_2, \theta_3, \theta_4]^T$, $s_i = \sin(\theta_i)$, 
+where $\vec{\theta} = [\theta_1, \theta_2, \theta_3, \theta_4]^T$, $s_i = \sin(\theta_i)$, 
 $c_i = \cos(\theta_i)$, $s_{ij} = \sin(\theta_i + \theta_j)$, and $c_{ij} = \cos(\theta_i + \theta_j)$. 
 We can calculate the contact point velocity by taking the derivative of this expression w.r.t. to time:
 
