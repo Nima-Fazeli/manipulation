@@ -138,3 +138,29 @@ pane of Fig. 3.  We define the contact frame at point $C$ with the following ort
   friction cone (more on this later).
 
 ## Force Transmissions and the Contact Jacobian
+
+Let's assume that a force is applied at $C$ to the object depicted in Fig. 3. In the vast 
+majority of our discussion, this force will be due to contact (e.g., from a finger or the environment). Our goal 
+is to map this force into the __wrench__ space of the object. For the block, we can think of the wrench space 
+as the composition of the forces (linear) and torque the object would experience at the Center of Mass (COM) frame. 
+While externally applied forces may or may not have torque components, the resulting object wrench is composed of 
+both forces and torques in general. The motivation for mapping forces into the wrench space of the system is that 
+the contribution of multiple forces can be summed up to predict the future states of the system.
+
+We will derive the mapping between the externally applied force at $C$ to the wrench space of the object in two ways. 
+The first approach will be a direct mapping using our knowledge of linear algebra. The second approach leverages 
+the classical notion of Jacobians and relations between velocities. The first approach is effective for simple systems 
+and for providing intuition, while the second approach generalizes much more easily and is easier to implement in code.
+
+**Approach 1:** Let's derive an example of the contact Jacobian for Fig. 3. To start, we assume that we have applied a 
+linear external force at point $C$. This force is represented in the object frame as:
+$$
+ \vec{f}_c =  f_t \bm{t} + f_n \vec{n} = \begin{bmatrix} n_y \\ -n_x \end{bmatrix} f_t + \begin{bmatrix} n_x \\ n_y \end{bmatrix} f_n = 
+ \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix} \begin{bmatrix} f_t \\ f_n \end{bmatrix}
+$$
+where we write the unit normal vector in the object frame as $\vec{n} = (n_x, n_y)$ where the subscripts specify 
+the projection of the vector along the object reference frame axes. Note that we have used the orthogonality of $\vec{n}$ and 
+$\vec{t}$ to re-write $\vec{t}$. The first component represents the tangential force along the unit tangent vector and 
+the second represents the normal force along the unit normal vector. Next, let's denote the vector pointing from the COM to 
+the contact point with $\vec{r} = (r_x, r_y)$ in the object frame. To compute the effect of this force at the COM we write:
+
