@@ -16,6 +16,14 @@ math: true
 
 1. Mechanics of Rigid-Body Frictional Interaction
     1. [Preliminaries](mechanics/preliminaries.md)
+        - Rigid-body Assumption
+        - Non-penetration Assumption
+        - States and Configuration Space
+        - Contact Frames and Contact Planes
+        - Force Transmissions and the Contact Jacobian
+        - Contact Force Constraints (high-level)
+        - Robot/Finger Jacobians
+    2. Grasping
 3. Perception for Rigid-Body Frictional Interactions
 4. Planning and Controls for Rigid-Body Interaction
 
