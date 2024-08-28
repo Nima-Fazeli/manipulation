@@ -51,7 +51,7 @@ $$
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-grasp-canon.png"  style="width: 55vw; min-width: 330px;"/>
+  <img src="figures/chapter-1-grasp-canon.png"  style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 2:</b> Example of a grasp with 2 fingers, each with two joints.
