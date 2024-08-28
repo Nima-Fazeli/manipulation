@@ -17,12 +17,14 @@ grasp is stable. This is referred to as **Grasp Analysis**. In later chapters, w
 The robot can pick and place grasped objects and/or use them as tools to interact with its environment. 
 A real-world example of a robotic system grasping objects autonomously is shown in Fig.~\ref{fig:chap1:arc}.
 
-\begin{figure}
-    \centering
-    \includegraphics{lecture-notes/chapter-1-mechanics/figures/chapter-1-arc.png}
-    \caption{Real-world grasping system -- Team MIT-Princeton's entry into the Amazon Robotics Challenge (2016-2017)}
-    \label{fig:chap1:arc}
-\end{figure}
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-arc.png" />
+</p>
+<figcaption> 
+  <b>Fig. 1:</b> Real-world grasping system -- Team MIT-Princeton's entry into the Amazon Robotics Challenge (2016-2017)
+</figcaption>
+</figure>
 
 In this section, we will assume all bodies are rigid and that Coulomb friction holds. In the remainder of this 
 section we will develop the grasp matrix, a fundamental tool in analyzing grasp quality, 
