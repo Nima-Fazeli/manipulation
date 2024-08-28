@@ -23,7 +23,7 @@ math: true
         - Force Transmissions and the Contact Jacobian
         - Contact Force Constraints (high-level)
         - Robot/Finger Jacobians
-    2. Grasping
+    2. [Grasp Analysis](mechanics/grasp-analysis.md)
 3. Perception for Rigid-Body Frictional Interactions
 4. Planning and Controls for Rigid-Body Interaction
 
