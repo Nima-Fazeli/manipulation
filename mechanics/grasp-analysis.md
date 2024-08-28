@@ -15,7 +15,7 @@ grasp is stable. This is referred to as **Grasp Analysis**. In later chapters, w
 **Grasp Synthesis**, where the goal is to compute a grasp rather than assume that one is given.
 
 The robot can pick and place grasped objects and/or use them as tools to interact with its environment. 
-A real-world example of a robotic system grasping objects autonomously is shown in Fig.~\ref{fig:chap1:arc}.
+A real-world example of a robotic system grasping objects autonomously is shown in Fig. 1.
 
 <figure>
 <p align="center">
@@ -34,3 +34,74 @@ to the task of planning for and controlling grasps and we will touch on these in
 
 In the remainder, our analysis follows the excellent Grasping chapter of \citet{prattichizzo2016grasping} 
 and we refer the reader to this text for further details.
+
+
+## Grasp Matrix
+
+Let's consider an object being grasped by our robot, e.g. the one depicted in Fig. 2. 
+The robot makes $N$ points of contacts with the object. The forces imparted by the robot to the object are 
+governed by Coulomb friction. We will restrict our selves to the class of point contacts. For this class, 
+each contact force $\vec{f}_{c,i}$ for $i=1, ..., N$ can be written in the contact frame as:
+
+$$
+\begin{align*}
+    \vec{f}_{c,i} = \begin{bmatrix} f_n \\ f_{t,1} \\ f_{t,2} \end{bmatrix}\; \text{in 3D;} \quad \quad \vec{f}_{c,i} = \begin{bmatrix} f_n \\ f_{t} \end{bmatrix}\; \text{in 2D}
+\end{align*}
+$$
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-grasp-canon.png" />
+</p>
+<figcaption> 
+  <b>Fig. 2:</b> Example of a grasp with 2 fingers, each with two joints.
+</figcaption>
+</figure>
+
+
+From [Preliminaries](preliminaries.md) section, we know that we can project this force into the reference 
+frame of the object using the contact Jacobian:
+
+$$
+\begin{align*}
+    \vec{w}_i = \mathrm{J}_{c,i} \vec{f}_i
+\end{align*}
+$$
+
+where $\vec{w}_i$ denotes the wrench in the object frame corresponding to the 
+force $\vec{f}_i$. Since $\vec{f}_i$ is governed by Coulomb friction, the corresponding 
+wrench is due to the projection of the friction cone into the reference frame of the object. 
+By summing up the individual contributions of all external forces applied by the robot to the 
+object we have a composite friction cone, similar to the 2 point contact case in planar pushing. We may write:
+
+$$
+\begin{align*}
+    \vec{w} = \sum_{i=1}^N \vec{w}_i = \sum_{i=1}^N \mathrm{J}_{c,i} \vec{f}_i = \begin{bmatrix} \mathrm{J}_{c,1} & ... & \mathrm{J}_{c,N} \end{bmatrix} \begin{bmatrix} \vec{f}_1 \\ ... \\ \vec{f}_N \end{bmatrix} = \mathrm{G} \vec{f}
+\end{align*}
+$$
+
+where $\mathrm{G}$ denotes the grasp matrix. In general, the grasp matrix is $6\times 3N$ dimensional 
+for frictional point contacts with rigid bodies. Given the grasp matrix (which implicitly encodes 
+the location of the grasps) and the coefficient of friction (to determine the friction cones), a grasp 
+is fully identified. Note that the composite friction wrench has an identical definition to the grasp matrix.  
+
+In our derivation so far, we have implicitly assumed that the fingers of the robot are able to impart 
+$\vec{f}_i$. In practice, the robots actuated joints can apply torques that are transmitted to the contact 
+point through a set of contact Jacobians as well. We may write this as:
+
+$$
+\begin{align*}
+    \vec{f}_i = \bar{\mathrm{J}}_{c,i} \vec{\tau}
+\end{align*}
+$$
+
+where we have used the bar notation to differentiate between the finger Jacobian and object Jacobian, 
+and the robot actuation is denoted as $\vec{\tau}$. With this consideration, a grasp is fully defined 
+by the grasp matrix $\mathrm{G}$, the robot Jacobians $\bar{\mathrm{J}}_{c,i}$, and the coefficients of 
+friction at the points of contact.
+
+One intuitive interpretation of the grasp matrix is that given a set of contact points and coefficients 
+of friction, we can compute all the external wrenches we can apply to the object that can be resisted by 
+the fingers. Another intuitive interpretation is that the grasp matrix qualifies the set of motions the 
+object is not able to make given a grasp. In the following sections, we formalize these notions into a 
+rigorous mathematical framework for grasp analysis.
