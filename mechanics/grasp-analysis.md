@@ -105,3 +105,91 @@ of friction, we can compute all the external wrenches we can apply to the object
 the fingers. Another intuitive interpretation is that the grasp matrix qualifies the set of motions the 
 object is not able to make given a grasp. In the following sections, we formalize these notions into a 
 rigorous mathematical framework for grasp analysis.
+
+## Grasp Analysis - Form Closure
+
+With the grasp matrix in hand, we are now staged to begin our discussion on useful types of grasps. We will begin with the notion of form closure. Intuitively, if the grasped object is in form closure then it is fully geometrically immobilized by the set contacts. We cannot perturb the object's configuration without violating any contact constraints; i.e. non-penetration. This simply means that any change in the configuration of the object with respect to the robot would lead to penetration of the object and is therefore impossible. This intuitive explanation is precisely how we write down and solve for form closure.
+
+As in the previous subsection, let's assume that there are a total of $N$ frictional contacts, each applying a force $\vec{f}_i$ at contact points $i=1, ..., N$. For each contact point, we define a distance function $\psi_i(\vec{q}, \vec{q}_c)$ for $i=1, ..., N$, where $\vec{q}$ denotes the object configuration and $\vec{q}_c$ denotes the configuration of the fingers. Together, these configurations specify the distance to contact for each contact point $i$. $\psi_i > 0$ implies separation, $\psi_i < 0$ implies penetration, and $\psi_i = 0$ implies contact. Let's assume all $N$ contacts are active; i.e. that $\psi_i=0$ for all $i$. Fig.~\ref{fig:chap1:gap} illustrates the distance functions for the grasp depicted in in Fig.~\ref{fig:chap1:canon}.
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-gap.png" />
+</p>
+<figcaption> 
+  <b>Fig. 3:</b> Distance functions for thee grasp depicted in Fig.~\ref{fig:chap1:canon}.
+</figcaption>
+</figure>
+
+For form closure to hold, we require that:
+
+$$
+\begin{align*}
+    \vec{\psi}(\vec{q} + d\vec{q}, \vec{q}_c) \geq = 0 \implies d\vec{q} = 0
+\end{align*}
+$$
+
+where the expression is to be evaluated element-wise. Intuitively, if any infinitesimal perturbation to the configuration of the object results in separation without penetration, then form-closure is violated. Conversely, we cannot find any infinitesimal perturbation to the configuration of the object that does not violate the non-penetration constraint. While this constraint provides an effective definition for form closure, we cannot use it in its current form.
+
+A first order approximation to the definition of form closure is:
+
+$$
+\begin{align*}
+    \frac{\partial \vec{\psi}}{\partial \vec{q}} d\vec{q} \geq 0 \implies d\vec{q} = 0
+\end{align*}
+$$
+
+Intuitively, this is just like the first term in the Taylor expansion approximation of the derivative definition we have for the form closure. The interpretation is the same as before; however, to a first order approximation of perturbation. We will now relate the first order approximation to the grasp matrix. 
+
+Since $\vec{\psi}$ is the distance function, it's gradient is the normal vector of the contact frames at each contact point. We know that the grasp matrix is composed of the set of normal and tangential components of contact frames. Let's denote the grasp matrix composed of only the normal contact vectors as $\mathrm{G}_n$. The condition above can equivalently be written as:
+
+$$
+\begin{align*}
+    \mathrm{G}^T_n \vec{v} \geq 0 \implies \vec{v} =0
+\end{align*}
+$$
+
+where $\vec{v}$ denotes the instantaneous object velocity. This implication simply means that there is no set of object velocities that would lead to separation at any contact point. An equivalent formulation of this implication can be written for the set of contact forces applied to the object. Let's denote the magnitude of the normal component of the contact force as $\vec{f}_{n}$, then a grasp has first order form closure iff:
+
+$$
+\begin{align*}
+    \mathrm{G}_n \vec{f}_n & = - \vec{g}  \quad \quad \forall \vec{g} \in \mathrm{R}^6 \\
+    \vec{f}_n & \geq 0
+\end{align*}
+$$
+
+The physical interpretation of this condition is that equilibrium can be maintained under the assumption that contacts are frictionless. We emphasize that $\vec{f}_n$ is only the magnitude of the normal component of the contact force and no other components. Since $\vec{g}$ is any vector in $\mathrm{R}^6$, for the inequality to hold we require that $\vec{g}$ be in the range of $\mathrm{G}_n$. Consequently, the rank of $\mathrm{G}_n$ must be 6 for the vector to lie in its range for all values it can take.
+
+We can also write the condition for first order form closure as there exists $\vec{f}_n$ such that the following two conditions hold:
+
+$$
+\begin{align*}
+    \mathrm{G}_n \vec{f}_n & = 0 \\
+    \vec{f}_n & > 0
+\end{align*}
+$$
+
+This condition means that there exists a set of strictly compressive normal contact forces in the null space of $\mathrm{G}_n$. This also means that we can squeeze the object as tightly as we'd like while maintaining equilibrium (at no point will the object leave the grasp). For the above conditions to hold, Somov 1897 proved that at least 7 contacts are necessary for a 6 degree of freedom object and 4 are required for the planar case. Fig.~\ref{fig:chap1:form-example} shows some example form closures in the plane (with 4 points of contact).
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-form-closure-examples.png" />
+</p>
+<figcaption> 
+  <b>Fig. 4:</b> 2 examples of form closures in the plane with 4 points of contact. This image is from \citet{prattichizzo2016grasping}.
+</figcaption>
+</figure>
+
+
+Geometrically, we can describe form closure using the composite friction cones we discussed in the previous sections. This idea is illustrated in Fig.~\ref{fig:chap1:form-geom}.
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-form-closure-gm.png" />
+</p>
+<figcaption> 
+  <b>Fig. 5:</b> Geometric interpretation of the form closure. Each finger is permitted to only apply a force along the normal. Consequently, wrench cones can be produced by having multiple contacts with non-co-linear normals. If the resulting cone spans the entire wrench space, then form closure is possible.
+</figcaption>
+</figure>
+
+
