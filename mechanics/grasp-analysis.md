@@ -114,7 +114,7 @@ As in the previous subsection, let's assume that there are a total of $N$ fricti
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-gap.png" />
+  <img src="figures/chapter-1-gap.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 3:</b> Distance functions for thee grasp depicted in Fig.~\ref{fig:chap1:canon}.
