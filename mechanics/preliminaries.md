@@ -106,7 +106,7 @@ but the set of admissible configurations objects are allowed to occupy. More on 
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-config.png" style="width: 25vw; min-width: 130px;"/>
+  <img src="figures/chapter-1-config.png" style="width: 50vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 2:</b> Visualization of state and configuration space for an object in 2D.
@@ -349,7 +349,7 @@ not in contact, while $\psi < 0$ implies penetration. $\psi = 0$ means precise t
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-distances.png" style="width: 25vw; min-width: 130px;"/>
+  <img src="figures/chapter-1-distances.png" style="width: 50vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 6:</b> Example distance functions.
@@ -444,7 +444,7 @@ space velocity and contact points velocity to the derive this Jacobian.
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-finger-jacobian.png" style="width: 25vw; min-width: 130px;"/>
+  <img src="figures/chapter-1-finger-jacobian.png" style="width: 50vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 9:</b> Fingers of a robot with contact points $C_1$ and $C_2$.cone.
