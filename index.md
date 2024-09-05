@@ -24,8 +24,12 @@ math: true
         - Contact Force Constraints (high-level)
         - Robot/Finger Jacobians
     2. [Grasp Analysis](mechanics/grasp-analysis.md)
+        - Grasp Matrix
+        - ...
+2. Planning and Controls for Rigid-Body Interaction
+    1. [Introduction](planning-control)(preliminaries.md)
 3. Perception for Rigid-Body Frictional Interactions
-4. Planning and Controls for Rigid-Body Interaction
+
 
 ### Preface
 
