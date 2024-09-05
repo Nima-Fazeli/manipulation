@@ -19,7 +19,7 @@ A real-world example of a robotic system grasping objects autonomously is shown 
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-arc.png" />
+  <img src="figures/chapter-1-arc.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 1:</b> Real-world grasping system -- Team MIT-Princeton's entry into the Amazon Robotics Challenge (2016-2017)
