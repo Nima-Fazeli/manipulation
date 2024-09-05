@@ -106,7 +106,7 @@ but the set of admissible configurations objects are allowed to occupy. More on 
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-config.png" />
+  <img src="figures/chapter-1-config.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 2:</b> Visualization of state and configuration space for an object in 2D.
@@ -234,7 +234,7 @@ along $x_w$ and the bottom is for $y_w$.
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-block-jacobian.png" />
+  <img src="figures/chapter-1-block-jacobian.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 4:</b> The pose of the object with respect to the world reference frame is $\vec{q}=(x,y,\theta)$. 
@@ -349,7 +349,7 @@ not in contact, while $\psi < 0$ implies penetration. $\psi = 0$ means precise t
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-distances.png" />
+  <img src="figures/chapter-1-distances.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 6:</b> Example distance functions.
@@ -385,7 +385,7 @@ quasi-dynamic regimes that are governed largely by the static coefficient of fri
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-point.png" />
+  <img src="figures/chapter-1-point.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 7:</b> Point mass in frictional contact with a fixed surface.
@@ -444,7 +444,7 @@ space velocity and contact points velocity to the derive this Jacobian.
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-finger-jacobian.png" />
+  <img src="figures/chapter-1-finger-jacobian.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
   <b>Fig. 9:</b> Fingers of a robot with contact points $C_1$ and $C_2$.cone.
