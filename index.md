@@ -28,7 +28,7 @@ math: true
         - ...
 2. Planning and Controls for Rigid-Body Interaction
     1. [Introduction](planning-control/preliminaries.md)
-    2. Dynamical Motion Primitives
+    2. [Dynamical Motion Primitives](planning-control/dmps.md)
 3. Perception for Rigid-Body Frictional Interactions
 
 
