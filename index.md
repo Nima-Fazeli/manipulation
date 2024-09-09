@@ -5,7 +5,7 @@ math: true
 #### [Nima Fazeli](https://www.mmintlab.com/people/nima-fazeli/)
 
 <div style="text-align: right"> &copy; Nima Fazeli, 2024 </div>
-<div style="text-align: right"> Last updated: 08-26-2024 </div>
+<div style="text-align: right"> Last updated: 09-08-2024 </div>
 <div style="text-align: right"> <a href="cite.md">How to cite</a>, How to give feedback </div>
 
 <br/><br/>
@@ -28,7 +28,7 @@ math: true
         - ...
 2. Planning and Controls for Rigid-Body Interaction
     1. [Introduction](planning-control/preliminaries.md)
-    2. [Dynamical Motion Primitives](planning-control/dmps.md)
+    2. Dynamical Motion Primitives
 3. Perception for Rigid-Body Frictional Interactions
 
 
