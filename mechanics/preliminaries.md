@@ -97,7 +97,7 @@ the absence of any constraints, this system has 24 state s $(12 \times 2)$ bodie
 we have removed a total of 6 degrees of freedom (1 linear and 2 rotational per object). The revolute joints between the 
 ground and the first body, and the first and second body also remove 2 degrees of freedom each. In total, the constraints 
 have removed 10 degrees of freedom, leaving just 2 degrees ($\theta_1, \theta_2$) resulting in a 4 dimensional state-space. 
-We usually represent state with a vector of real numbers and here denote it as $\vec{s}_t \in \mathbb{R}^n$. 
+We usually represent state with a vector of real numbers and here denote it as $\mathbf{s}_t \in \mathbb{R}^n$. 
 
 Configuration space is a subset of state space that describes the positions of a system **\cite{lozano1990spatial}**. Fig. 2 
 depicts a 2D block in the world frame and its corresponding representation in configuration space. 
@@ -129,11 +129,11 @@ attached to it's center of mass (COM) as the object frame. Let's assume that the
 some other object. We define the contact plane as the plane tangent to both objects, with an example shown in the middle 
 pane of Fig. 3.  We define the contact frame at point $C$ with the following orthogonal axes: 
 
-* the contact normal $\vec{n}$ is specified by the unit vector orthogonal to the contact plane -- the plane passing
+* the contact normal $\mathbf{n}$ is specified by the unit vector orthogonal to the contact plane -- the plane passing
   through the contact frame point tangent to the contacting bodies,
-* the tangent vector $\vec{t}$ lies in the contact plane. In the 2D case, such as the one visualized in left
-  pane of Fig. 3, it is convention to choose $\vec{t}$ such that its cross product into
-  $\vec{n}$ points out of the plane towards us. In 3D, there are always 2 orthogonal tangent vectors and their
+* the tangent vector $\mathbf{t}$ lies in the contact plane. In the 2D case, such as the one visualized in left
+  pane of Fig. 3, it is convention to choose $\mathbf{t}$ such that its cross product into
+  $\mathbf{n}$ points out of the plane towards us. In 3D, there are always 2 orthogonal tangent vectors and their
   choice is somewhat arbitrary, right panel of Fig. 3. It is common to choose them such that
   they either lie along the world frame coordinates or such that they simplify approximations to the contact
   friction cone (more on this later).
@@ -157,19 +157,19 @@ and for providing intuition, while the second approach generalizes much more eas
 linear external force at point $C$. This force is represented in the object frame as:
 
 $$
-\vec{f}_c =  f_t \vec{t} + f_n \vec{n} = \begin{bmatrix} n_y \\ -n_x \end{bmatrix} f_t + \begin{bmatrix} n_x \\ n_y \end{bmatrix} f_n = 
+\mathbf{f}_c =  f_t \mathbf{t} + f_n \mathbf{n} = \begin{bmatrix} n_y \\ -n_x \end{bmatrix} f_t + \begin{bmatrix} n_x \\ n_y \end{bmatrix} f_n = 
  \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix} \begin{bmatrix} f_t \\ f_n \end{bmatrix}
 $$
  
-where we write the unit normal vector in the object frame as $\vec{n} = (n_x, n_y)$ where the subscripts specify 
-the projection of the vector along the object reference frame axes. Note that we have used the orthogonality of $\vec{n}$ and 
-$\vec{t}$ to re-write $\vec{t}$. The first component represents the tangential force along the unit tangent vector and 
+where we write the unit normal vector in the object frame as $\mathbf{n} = (n_x, n_y)$ where the subscripts specify 
+the projection of the vector along the object reference frame axes. Note that we have used the orthogonality of $\mathbf{n}$ and 
+$\mathbf{t}$ to re-write $\mathbf{t}$. The first component represents the tangential force along the unit tangent vector and 
 the second represents the normal force along the unit normal vector. Next, let's denote the vector pointing from the COM to 
-the contact point with $\vec{r} = (r_x, r_y)$ in the object frame. To compute the effect of this force at the COM we write:
+the contact point with $\mathbf{r} = (r_x, r_y)$ in the object frame. To compute the effect of this force at the COM we write:
 
 $$
 \begin{aligned}
-    \vec{w}_{n} = \begin{bmatrix}  \vec{n} \\  \vec{r} \times \vec{n} \end{bmatrix} f_n = \begin{bmatrix}  n_x \\ n_y \\  r_xn_y - r_yn_x  \end{bmatrix} f_n 
+    \mathbf{w}_{n} = \begin{bmatrix}  \mathbf{n} \\  \mathbf{r} \times \mathbf{n} \end{bmatrix} f_n = \begin{bmatrix}  n_x \\ n_y \\  r_xn_y - r_yn_x  \end{bmatrix} f_n 
 \end{aligned}
 $$
 
@@ -179,7 +179,7 @@ $f_t$ at the COM is:
 
 $$
 \begin{aligned}
-    \vec{w}_{t} = \begin{bmatrix}  n_y \\ -n_x \\ -r_x n_x - r_y n_y  \end{bmatrix} f_t
+    \mathbf{w}_{t} = \begin{bmatrix}  n_y \\ -n_x \\ -r_x n_x - r_y n_y  \end{bmatrix} f_t
 \end{aligned}
 $$
 
@@ -187,7 +187,7 @@ To find the total wrench applied to the COM, we simply consolidate the previous 
 
 $$
 \begin{align*}
-    \vec{w} = \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \vec{f}_c = \mathrm{J}_c \vec{f}_c
+    \mathbf{w} = \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \mathbf{f}_c = \mathrm{J}_c \mathbf{f}_c
 \end{align*}
 $$
 
@@ -197,38 +197,38 @@ important concept we will revisit consistently in the remainder of these notes.
 
 **Approach 2:** Classically, a Jacobian in mathematics is the matrix you'd get if you took the gradient of a 
 vector-valued function with respect to its arguments. To illustrate, assume that 
-$\vec{x} \in \mathbb{R}^n$ and $\vec{y} \in \mathbb{R}^m$. Let's assume these vectors are related by a function $f$, 
+$\mathbf{x} \in \mathbb{R}^n$ and $\mathbf{y} \in \mathbb{R}^m$. Let's assume these vectors are related by a function $f$, 
 then the Jacobian is:
 
 $$
 \begin{align*}
-    \vec{y} = f(\vec{x}) \; \rightarrow \quad \frac{\partial \vec y}{\partial \vec x} = \mathrm{J} = \begin{bmatrix} \frac{\partial y_1}{\partial x_1} & \cdot & \frac{\partial y_1}{\partial x_n} \\ \vdots & \ddots & \vdots \\ \frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n} \end{bmatrix}
+    \mathbf{y} = f(\mathbf{x}) \; \rightarrow \quad \frac{\partial \mathbf y}{\partial \mathbf x} = \mathrm{J} = \begin{bmatrix} \frac{\partial y_1}{\partial x_1} & \cdot & \frac{\partial y_1}{\partial x_n} \\ \vdots & \ddots & \vdots \\ \frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n} \end{bmatrix}
 \end{align*}
 $$
 
 You may be starting to wonder how this relates  to mapping forces to the COM. We're going to show that the 
 transpose of the Jacobian mapping robot velocities to Cartesian velocities relates external forces to the COM. 
 To see this, consider the block visualized in Fig.~\ref{fig:tikz-block} and note that the position of point $C$ 
-(denoted by $\vec{r}_c$) can be represented by the sum of $\vec{r}_o+\vec{r}$. Let's write this as a function:
+(denoted by $\mathbf{r}_c$) can be represented by the sum of $\mathbf{r}_o+\mathbf{r}$. Let's write this as a function:
 
 $$
 \begin{align*}
-    \vec{r}_c(\vec{q})= f(\vec{q}) = \vec{r}_o+\vec{r} 
+    \mathbf{r}_c(\mathbf{q})= f(\mathbf{q}) = \mathbf{r}_o+\mathbf{r} 
 \end{align*}
 $$
 
-where $\vec{q}=(x,y,\theta)$ represents the pose of the object with respect to the origin of the world frame. 
+where $\mathbf{q}=(x,y,\theta)$ represents the pose of the object with respect to the origin of the world frame. 
 We can take the time derivative of this expression to compute the velocity of point $C$:
 
 $$
 \begin{align}
-    \vec{v}_c = \frac{d\vec{r}_c(\vec{q})}{dt} = \frac{\partial \vec{r}_c(\vec{q})}{\partial \vec{q}} \frac{d \vec{q}}{dt} = \mathrm{J} \dot{\vec{q}} = \begin{bmatrix} 1 & 0 & -r_y \\ 0 & 1 & r_x \end{bmatrix}  \dot{\vec{q}}
+    \mathbf{v}_c = \frac{d\mathbf{r}_c(\mathbf{q})}{dt} = \frac{\partial \mathbf{r}_c(\mathbf{q})}{\partial \mathbf{q}} \frac{d \mathbf{q}}{dt} = \mathrm{J} \dot{\mathbf{q}} = \begin{bmatrix} 1 & 0 & -r_y \\ 0 & 1 & r_x \end{bmatrix}  \dot{\mathbf{q}}
 \end{align}
 $$
 
-where $\vec{r}=(r_x, r_y)$ is defined just as approach 1. Here, the Jacobian maps the object __twist__
-$\dot{\vec{q}} \in \mathbb{R}^3$ (the object's linear and rotational velocities) to the contact point linear 
-velocity $\vec{v_c}\in \mathbb{R}^2$. To understand/derive the final column, consider the velocity of point $C$ 
+where $\mathbf{r}=(r_x, r_y)$ is defined just as approach 1. Here, the Jacobian maps the object __twist__
+$\dot{\mathbf{q}} \in \mathbb{R}^3$ (the object's linear and rotational velocities) to the contact point linear 
+velocity $\mathbf{v_c}\in \mathbb{R}^2$. To understand/derive the final column, consider the velocity of point $C$ 
 when the object undergoes pure rotation about point $O$, the top row is the projection of the velocity vector 
 along $x_w$ and the bottom is for $y_w$. 
 
@@ -237,19 +237,19 @@ along $x_w$ and the bottom is for $y_w$.
   <img src="figures/chapter-1-block-jacobian.png" style="width: 25vw; min-width: 130px;"/>
 </p>
 <figcaption> 
-  <b>Fig. 4:</b> The pose of the object with respect to the world reference frame is $\vec{q}=(x,y,\theta)$. 
-  The contact point is denoted by $C$. The vectors $\vec{r}_o$ and $\vec{r}$ point from the origin to the 
+  <b>Fig. 4:</b> The pose of the object with respect to the world reference frame is $\mathbf{q}=(x,y,\theta)$. 
+  The contact point is denoted by $C$. The vectors $\mathbf{r}_o$ and $\mathbf{r}$ point from the origin to the 
   COM and from the COM to the contact point, respectively.
 </figcaption>
 </figure>
 
 Now we make use of the fact that energy (and consequently power) is conserved. If we apply some force 
-$\vec{f}_c$ at point $C$ (represented in the object frame just as approach 1), it will result in a wrench 
-at the COM $\vec{w}_o$. The total power provided by the applied force and resulting object wrench must be equal so we can write:
+$\mathbf{f}_c$ at point $C$ (represented in the object frame just as approach 1), it will result in a wrench 
+at the COM $\mathbf{w}_o$. The total power provided by the applied force and resulting object wrench must be equal so we can write:
 
 $$
 \begin{align*}
-    \vec{w}_o \cdot \dot{\vec{q}} = \vec{f}_c \cdot \vec{v}_c  
+    \mathbf{w}_o \cdot \dot{\mathbf{q}} = \mathbf{f}_c \cdot \mathbf{v}_c  
 \end{align*}
 $$
 
@@ -257,16 +257,16 @@ Now recall that we already derived a relationship between object twist and the v
 
 $$
 \begin{align*}
-    \vec{w}_o \cdot \dot{\vec{q}} = \vec{f}_c \cdot (\mathrm{J}\dot{\vec{q}}) \quad \rightarrow \quad \dot{\vec{q}}^T \vec{w}_o  = \dot{\vec{q}}^T\mathrm{J}^T \vec{f}_c
+    \mathbf{w}_o \cdot \dot{\mathbf{q}} = \mathbf{f}_c \cdot (\mathrm{J}\dot{\mathbf{q}}) \quad \rightarrow \quad \dot{\mathbf{q}}^T \mathbf{w}_o  = \dot{\mathbf{q}}^T\mathrm{J}^T \mathbf{f}_c
 \end{align*}
 $$
 
-Since this relationship must hold for all values of $\dot{\vec{q}}$, then we can simplify to:
+Since this relationship must hold for all values of $\dot{\mathbf{q}}$, then we can simplify to:
 
 $$
 \begin{align*}
-    \vec{w}_o  = \mathrm{J}^T\vec{f}_c = \begin{bmatrix} 1 & 0  \\ 0 & 1 \\ -r_y & r_x \end{bmatrix}  \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix}\vec{f}_c =
-    \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \vec{f}_c = \mathrm{J}_c \vec{f}_c
+    \mathbf{w}_o  = \mathrm{J}^T\mathbf{f}_c = \begin{bmatrix} 1 & 0  \\ 0 & 1 \\ -r_y & r_x \end{bmatrix}  \begin{bmatrix} n_y & n_x \\ -n_x & n_y \end{bmatrix}\mathbf{f}_c =
+    \begin{bmatrix}  n_y & n_x \\ -n_x & n_y \\ -r_x n_x - r_y n_y & r_x n_y - r_y n_x \end{bmatrix} \mathbf{f}_c = \mathrm{J}_c \mathbf{f}_c
 \end{align*}
 $$
 
@@ -280,9 +280,9 @@ configuration of the arm) and compute the gradient w.r.t. the arm configurations
 
 $$
 \begin{align*}
-    \vec{r}_c = f(\vec{q}) = \begin{bmatrix} l_1 \cos{\theta_1} & l_1 \cos{\theta_1} + l_2 \cos{(\theta_1+\theta_2)} \\ 
+    \mathbf{r}_c = f(\mathbf{q}) = \begin{bmatrix} l_1 \cos{\theta_1} & l_1 \cos{\theta_1} + l_2 \cos{(\theta_1+\theta_2)} \\ 
     l_1 \sin{\theta_1} & l_1 \sin{\theta_1} + l_2 \sin{(\theta_1+\theta_2)}
-    \end{bmatrix} \rightarrow \quad \mathrm{J} = \frac{\partial f(\vec{q})}{ \partial \vec{q}} = \begin{bmatrix} - l_1 \sin{\theta_1} & -l_1 \sin{\theta_1} - l_2 \sin{(\theta_1+\theta_2)} \\ 
+    \end{bmatrix} \rightarrow \quad \mathrm{J} = \frac{\partial f(\mathbf{q})}{ \partial \mathbf{q}} = \begin{bmatrix} - l_1 \sin{\theta_1} & -l_1 \sin{\theta_1} - l_2 \sin{(\theta_1+\theta_2)} \\ 
     l_1 \cos{\theta_1} & l_1 \cos{\theta_1} + l_2 \cos{(\theta_1+\theta_2)}
     \end{bmatrix}
 \end{align*}
@@ -292,22 +292,22 @@ Then the effective torques applied to the joints due to the external force $C$ i
 
 $$
 \begin{align*}
-    \vec{\tau} = \mathrm{J}^T \vec{f}_c = \mathrm{J}_c \vec{f}_c
+    \mathbf{\tau} = \mathrm{J}^T \mathbf{f}_c = \mathrm{J}_c \mathbf{f}_c
 \end{align*}
 $$
 
-where we represent $\vec{f}_c$ in the world frame. You may wonder: "why was $\vec{f}_c$ 
+where we represent $\mathbf{f}_c$ in the world frame. You may wonder: "why was $\mathbf{f}_c$ 
 represented in the object frame for the block example but in the world frame for the two-link manipulator?". 
 This is an astute question. One answer is to note the frame in which we write the total power:
 
 $$
 \begin{align*}
-    \vec{\tau} \cdot \dot{\vec{\theta}} = \vec{f}_c \cdot \vec{v}_c
+    \mathbf{\tau} \cdot \dot{\mathbf{\theta}} = \mathbf{f}_c \cdot \mathbf{v}_c
 \end{align*}
 $$
 
 Since we have chosen to measure the angles and angular rotations of the arm with respect to the 
-world frame, and measure the velocity of point $C$ in the world frame, then $\vec{f}_c$ must 
+world frame, and measure the velocity of point $C$ in the world frame, then $\mathbf{f}_c$ must 
 also be in the same frame for the dot product to make sense. In the previous example, we represented 
 everything in the object frame. 
 
@@ -317,7 +317,7 @@ everything in the object frame.
 </p>
 <figcaption> 
   <b>Fig. 5:</b> A two link manipulator with an external force applied at $C$. The configuration of 
-  this system is entirely determined by $\vec{q}=(\theta_1, \theta_2)$
+  this system is entirely determined by $\mathbf{q}=(\theta_1, \theta_2)$
 </figcaption>
 </figure>
 
@@ -329,20 +329,20 @@ $C$. However, forces due to contact must satisfy a number of constraints that we
 Perhaps the most fundamental contact constraint states that when two bodies come into contact, the 
 resultant normal force between the objects must "push" on the objects to prevent penetration. 
 This force can never pull. The implication of this constraint is that the normal component of the 
-contact force $\vec{f}_c$ must be non-negative:
+contact force $\mathbf{f}_c$ must be non-negative:
 
 $$
 \begin{align*}
-    \vec{f}_c =  f_t \vec{t} + f_n \vec{n} \quad \text{such that} \quad f_n \geq 0
+    \mathbf{f}_c =  f_t \mathbf{t} + f_n \mathbf{n} \quad \text{such that} \quad f_n \geq 0
 \end{align*}
 $$
 
-There is a small subtlety hidden in this constraint: we assume that $\vec{n}$ is pointing "into" 
+There is a small subtlety hidden in this constraint: we assume that $\mathbf{n}$ is pointing "into" 
 the object due to the way that we defined the contact plane and the contact normal. Thus, $f_n \geq 0$ 
 means pushing "into" the object. We note that this constraint alone is not the same as non-penetration. 
 It is possible for two bodies to penetrate while still pushing against each other. Towards enforcing 
 non-penetration, first let's denote the distance function between the two bodies with 
-$\psi(\vec{q}) \; : \; \vec{q}\in \mathbb{R}^n \rightarrow \mathbb{R}$. Fig. 6 
+$\psi(\mathbf{q}) \; : \; \mathbf{q}\in \mathbb{R}^n \rightarrow \mathbb{R}$. Fig. 6 
 illustrates 2 examples of distance functions between 3 objects. When $\psi >0 $ then the objects are 
 not in contact, while $\psi < 0$ implies penetration. $\psi = 0$ means precise tangency of two objects 
 (they are only just touching). 
@@ -453,25 +453,25 @@ space velocity and contact points velocity to the derive this Jacobian.
 
 Our first step is to relate the joint angles to the contact point locations $C_1$ and $C_2$ in the fixed 
 hand reference frame. This procedure is referred to as forward kinematics. Let's denote the location of the 
-contact points $C_1$ and $C_2$ as $\vec{q}_c$. We may write:
+contact points $C_1$ and $C_2$ as $\mathbf{q}_c$. We may write:
 
 $$
 \begin{align*}
-    \vec{q}_c = \begin{bmatrix} x_{c1} \\ y_{c1} \\ x_{c2} \\ y_{c2} \end{bmatrix} = fk(\vec{\theta}) =  \begin{bmatrix} l_1c_1 + l_2 c_{12} + r_{1,x} \\ l_1s_1 + l_2 s_{12} + r_{1,y} \\ l_3c_3 + l_4 c_{34} + r_{2,x} \\ l_3s_3 + l_4 s_{34} + r_{2,y} \end{bmatrix}
+    \mathbf{q}_c = \begin{bmatrix} x_{c1} \\ y_{c1} \\ x_{c2} \\ y_{c2} \end{bmatrix} = fk(\mathbf{\theta}) =  \begin{bmatrix} l_1c_1 + l_2 c_{12} + r_{1,x} \\ l_1s_1 + l_2 s_{12} + r_{1,y} \\ l_3c_3 + l_4 c_{34} + r_{2,x} \\ l_3s_3 + l_4 s_{34} + r_{2,y} \end{bmatrix}
 \end{align*}
 $$
 
-where $\vec{\theta} = [\theta_1, \theta_2, \theta_3, \theta_4]^T$, $s_i = \sin(\theta_i)$, 
+where $\mathbf{\theta} = [\theta_1, \theta_2, \theta_3, \theta_4]^T$, $s_i = \sin(\theta_i)$, 
 $c_i = \cos(\theta_i)$, $s_{ij} = \sin(\theta_i + \theta_j)$, and $c_{ij} = \cos(\theta_i + \theta_j)$. 
 We can calculate the contact point velocity by taking the derivative of this expression w.r.t. to time:
 
 $$
 \begin{align*}
-    \dot{\vec{q}}_c = \frac{\partial fk(\vec{\theta})}{\partial \vec{\theta}}\dot{\vec{\theta}} = \begin{bmatrix} -l_1s_1-l_2s_{12} & -l_2s_{12} & 0 & 0 \\
+    \dot{\mathbf{q}}_c = \frac{\partial fk(\mathbf{\theta})}{\partial \mathbf{\theta}}\dot{\mathbf{\theta}} = \begin{bmatrix} -l_1s_1-l_2s_{12} & -l_2s_{12} & 0 & 0 \\
     l_1c_1+l_2c_{12} & l_2c_{12} & 0 & 0 \\
     0 & 0 & -l_3s_3-l_4s_{34} & -l_4s_{34} \\
     0 & 0 & l_3s_3+l_4s_{34} & l_4c_{34}
-    \end{bmatrix} \dot{\vec{\theta}} = \mathrm{J}^T_f \dot{\vec{\theta}} 
+    \end{bmatrix} \dot{\mathbf{\theta}} = \mathrm{J}^T_f \dot{\mathbf{\theta}} 
 \end{align*}
 $$
 
@@ -481,16 +481,16 @@ of power the fingers can exert is:
 
 $$
 \begin{align*}
-    P_f = \vec{\tau}^T \dot{\vec{\theta}}
+    P_f = \mathbf{\tau}^T \dot{\mathbf{\theta}}
 \end{align*}
 $$
 
-where $\vec{\tau}$ denotes the joint torques. The total power exerted at the contact points 
+where $\mathbf{\tau}$ denotes the joint torques. The total power exerted at the contact points 
 by the externally applied forces is equal to:
 
 $$
 \begin{align*}
-    P_c = \vec{f}^T_c \dot{\vec{q}}_c
+    P_c = \mathbf{f}^T_c \dot{\mathbf{q}}_c
 \end{align*}
 $$
 
@@ -498,7 +498,7 @@ Since the input power has to equal the output power, we write:
 
 $$
 \begin{align*}
-    \vec{\tau}^T \dot{\vec{\theta}} = \vec{f}^T_c \dot{\vec{q}}_c
+    \mathbf{\tau}^T \dot{\mathbf{\theta}} = \mathbf{f}^T_c \dot{\mathbf{q}}_c
 \end{align*}
 $$
 
@@ -506,15 +506,15 @@ now replacing the relationship we just derived for the Jacobian:
 
 $$
 \begin{align*}
-    \vec{\tau}^T \dot{\vec{\theta}} = \vec{f}^T_c \mathrm{J}^T_f  \dot{\vec{\theta}}
+    \mathbf{\tau}^T \dot{\mathbf{\theta}} = \mathbf{f}^T_c \mathrm{J}^T_f  \dot{\mathbf{\theta}}
 \end{align*}
 $$
 
-and since this relationship has to hold for all values of $\dot{\vec{\theta}}$ then we can conclude that:
+and since this relationship has to hold for all values of $\dot{\mathbf{\theta}}$ then we can conclude that:
 
 $$
 \begin{align*}
-    \vec{\tau} =  \mathrm{J}_f  \vec{f}_c
+    \mathbf{\tau} =  \mathrm{J}_f  \mathbf{f}_c
 \end{align*}
 $$
 
