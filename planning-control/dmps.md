@@ -3,7 +3,7 @@ layout: default
 math: true
 ---
 
-## Dynamical Movement Primitives (DMPs)
+# Dynamical Movement Primitives (DMPs)
 
 Dynamical Movement Primitives (DMPs) are a powerful framework for representing and 
 learning complex motor behaviors in robotics. Originally developed for learning and 
