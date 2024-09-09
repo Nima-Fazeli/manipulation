@@ -15,25 +15,25 @@ we'll explore the generalization of DMPs to general articulated serial-link robo
 ## Building Intuition with Point Robots
 
 A point robot is a simple representation of a robot where the configuration is specified 
-by a position $\vec{x}(t) \in \mathbb{R}^n$, where $n$ is the dimension of the space 
+by a position $\mathbf{x}(t) \in \mathbb{R}^n$, where $n$ is the dimension of the space 
 (e.g., $n=2$ for a planar point robot). The goal of a DMP is to generate smooth trajectories 
-for the robot to follow from its current position $\vec{x}$ to a goal position 
-$\vec{x}_g$ while allowing for flexibility and generalization in the movement.
+for the robot to follow from its current position $\mathbf{x}$ to a goal position 
+$\mathbf{x}_g$ while allowing for flexibility and generalization in the movement.
 
 To fire up your intuition, consider a point robot in 2D. The governing equation of motion is:
 
 $$
-    \vec{f} = m \ddot{\vec{x}}
+    \mathbf{f} = m \ddot{\mathbf{x}}
 $$
 
-where $\vec{f}$ represents the force we choose to apply to the robot and $\ddot{\vec{x}}$
+where $\mathbf{f}$ represents the force we choose to apply to the robot and $\ddot{\mathbf{x}}$
 represents the acceleration of the robot. Now imagine that the point robot is attached to its goal through a
 ficticous spring and damper. The forces corresponding to these to fictional elements are:
 
 $$
 \begin{align}
-    \vec{f}_s & = k_s(\vec{x}_g - \vec{x}) \\
-    \vec{f}_d & = k_d(\dot{\vec{x}}_g - \dot{\vec{x}})
+    \mathbf{f}_s & = k_s(\mathbf{x}_g - \mathbf{x}) \\
+    \mathbf{f}_d & = k_d(\dot{\mathbf{x}}_g - \dot{\mathbf{x}})
 \end{align}
 $$
 
@@ -42,22 +42,22 @@ by writing down the equations of motion with the force from these elements:
 
 $$
 \begin{align}
-    & \vec{f} = k_s(\vec{x}_g - \vec{x}) +  k_d(\dot{\vec{x}}_g - \dot{\vec{x}}) = m \ddot{\vec{x}} \\
-    & m \ddot{\vec{x}} + k_d (\dot{\vec{x}} - \dot{\vec{x}}_g) + k_s(\vec{x} - \vec{x}_g ) = 0
+    & \mathbf{f} = k_s(\mathbf{x}_g - \mathbf{x}) +  k_d(\dot{\mathbf{x}}_g - \dot{\mathbf{x}}) = m \ddot{\mathbf{x}} \\
+    & m \ddot{\mathbf{x}} + k_d (\dot{\mathbf{x}} - \dot{\mathbf{x}}_g) + k_s(\mathbf{x} - \mathbf{x}_g ) = 0
 \end{align}
 $$
 
-Now lets assume that the goal velocity is zero $\dot{\vec{x}}_g = 0$, then we can simplify the expression:
+Now lets assume that the goal velocity is zero $\dot{\mathbf{x}}_g = 0$, then we can simplify the expression:
 
 $$
 \begin{align}
-    m \ddot{\vec{x}} + k_d \dot{\vec{x}} + k_s(\vec{x} - \vec{x}_g ) = 0
+    m \ddot{\mathbf{x}} + k_d \dot{\mathbf{x}} + k_s(\mathbf{x} - \mathbf{x}_g ) = 0
 \end{align}
 $$
 
-The resultng autonomous dynamical system is guaranteed to converge to $\vec{x}_g$ from any point in $\vec{x}$.
+The resultng autonomous dynamical system is guaranteed to converge to $\mathbf{x}_g$ from any point in $\mathbf{x}$.
 This convergence is asymptotic as long as $k_d \geq 0$ and $k_s \geq 0$ and the robot has a positive mass.
-Further, even if we move $\vec{x}_g$, the system will actively track this point. The importance of this result
+Further, even if we move $\mathbf{x}_g$, the system will actively track this point. The importance of this result
 cannot be understated, by simply choosing a spring and damper control law, we can drive our system to any
 desired goal state from any initial state. We note that with our current formulation, the path towards the goal
 is always a straight line, and the speed at which we travel along this path is determined by the spring and
@@ -67,7 +67,7 @@ dynamical systems depending on our needs.
 **how DMPs address these limitations by given us more flexibility over path traveled and speed along the path**
 
 $$
-    \vec{x} = \mathbf{x}
+    \mathbf{x} = \mathbf{x}
 $$
 
 ### Canonical System
@@ -95,7 +95,7 @@ by a second-order dynamical system:
 
 $$
 \begin{equation}
-    \tau \ddot{\vec{x}}(t) = \alpha_x \left( \beta_x (\vec{x}_g - \vec{x}(t)) - \dot{\vec{x}}(t) \right) + f(s(t)),
+    \tau \ddot{\mathbf{x}}(t) = \alpha_x \left( \beta_x (\mathbf{x}_g - \mathbf{x}(t)) - \dot{\mathbf{x}}(t) \right) + f(s(t)),
 \end{equation}
 $$
 
@@ -124,7 +124,7 @@ flexible and robust structure.
 
 DMPs offer several desirable properties for motion generation in robotics:
 
-- **Generalization:** DMPs can generalize a learned movement to different start and goal positions by adjusting $\vec{x}_0$ and $\vec{x}_g$.
+- **Generalization:** DMPs can generalize a learned movement to different start and goal positions by adjusting $\mathbf{x}_0$ and $\mathbf{x}_g$.
 - **Robustness:** DMPs naturally handle perturbations by following a stable attractor towards the goal position.
 - **Time Invariance:** The separation of the canonical and transformation systems allows the same trajectory to be executed over different time scales.
 - **Learning from Demonstration:** DMPs can be efficiently learned from a small number of demonstrations, making them practical for robot learning tasks.
