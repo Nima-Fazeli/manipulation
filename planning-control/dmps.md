@@ -9,20 +9,67 @@ Dynamical Movement Primitives (DMPs) are a powerful framework for representing a
 learning complex motor behaviors in robotics. Originally developed for learning and 
 generalizing human motion, DMPs are particularly useful in robotic systems where 
 adaptability and robustness to perturbations are required. In this section, we introduce 
-DMPs in the context of point robots and explain the underlying principles.
+DMPs first in the context of point robots and explain the underlying principles. Then,
+we'll explore the generalization of DMPs to general articulated serial-link robots.
 
-## DMPs for Point Robots
+## Building Intuition with Point Robots
 
 A point robot is a simple representation of a robot where the configuration is specified 
 by a position $\vec{x}(t) \in \mathbb{R}^n$, where $n$ is the dimension of the space 
 (e.g., $n=2$ for a planar point robot). The goal of a DMP is to generate smooth trajectories 
-for the robot to follow from an initial position $\vec{x}_0$ to a goal position 
+for the robot to follow from its current position $\vec{x}$ to a goal position 
 $\vec{x}_g$ while allowing for flexibility and generalization in the movement.
+
+To fire up your intuition, consider a point robot in 2D. The governing equation of motion is:
+
+$$
+    \vec{f} = m \ddot{\vec{x}}
+$$
+
+where $\vec{f}$ represents the force we choose to apply to the robot and $\ddot{\vec{x}}$$
+represents the acceleration of the robot. Now imagine that the point robot is attached to its goal through a
+ficticous spring and damper. The forces corresponding to these to fictional elements are:
+
+$$
+\begin{align}
+    \vec{f}_s & = k_s(\vec{x}_g - \vec{x}) \\
+    \vec{f}_d & = k_d(\dot{\vec{x}}_g - \dot{\vec{x}})
+\end{align}
+
+The effect of this fictious elements are to pull the robot towards the goal. We can see this
+by writing down the equations of motion with the force from these elements:
+
+$$
+\begin{align}
+    & \vec{f} = k_s(\vec{x}_g - \vec{x}) +  k_d(\dot{\vec{x}}_g - \dot{\vec{x}}) = m \ddot{\vec{x}} \\
+    & m \ddot{\vec{x}} + k_d (\dot{\vec{x}} - \dot{\vec{x}}_g) + k_s(\vec{x} - \vec{x}_g ) = 0
+\end{align}
+$$
+
+Now lets assume that the goal velocity is zero $\dot{\vec{x}}_g = 0$, then we can simplify the expression:
+
+$$
+\begin{align}
+    m \ddot{\vec{x}} + k_d \dot{\vec{x}} + k_s(\vec{x} - \vec{x}_g ) = 0
+\end{align}
+$$
+
+The resultng autonomous dynamical system is guaranteed to converge to $\vec{x}_g$ from any point in $\vec{x}$.
+This convergence is asymptotic as long as $k_d \geq 0$ and $\k_s \geq 0$ and the robot has a positive mass.
+Further, even if we move $\vec{x}_g$, the system will actively track this point. The importance of this result
+cannot be understated, by simply choosing a spring and damper control law, we can drive our system to any
+desired goal state from any initial state. We note that with our current formulation, the path towards the goal
+is always a straight line, and the speed at which we travel along this path is determined by the spring and
+damper coefficients. It is entirely possible to design under-damped (over-shooting) or over-damped (no overshoot)
+dynamical systems depending on our needs.
+
+**how DMPs address these limitations by given us more flexibility over path traveled and speed along the path**
+
 
 ### Canonical System
 
 The key idea behind DMPs is to separate the time evolution of the system from the 
-spatial component. To achieve this, DMPs introduce a \emph{canonical system} that acts as 
+spatial component. To achieve this, DMPs introduce a _canonical system_ that acts as 
 a phase variable, $s(t) \in [0,1]$, which monotonically decays over time. The canonical 
 system is governed by the differential equation:
 
