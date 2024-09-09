@@ -26,7 +26,7 @@ $$
     \vec{f} = m \ddot{\vec{x}}
 $$
 
-where $\vec{f}$ represents the force we choose to apply to the robot and $\ddot{\vec{x}}$$
+where $\vec{f}$ represents the force we choose to apply to the robot and $\ddot{\vec{x}}$
 represents the acceleration of the robot. Now imagine that the point robot is attached to its goal through a
 ficticous spring and damper. The forces corresponding to these to fictional elements are:
 
@@ -35,6 +35,7 @@ $$
     \vec{f}_s & = k_s(\vec{x}_g - \vec{x}) \\
     \vec{f}_d & = k_d(\dot{\vec{x}}_g - \dot{\vec{x}})
 \end{align}
+$$
 
 The effect of this fictious elements are to pull the robot towards the goal. We can see this
 by writing down the equations of motion with the force from these elements:
@@ -55,7 +56,7 @@ $$
 $$
 
 The resultng autonomous dynamical system is guaranteed to converge to $\vec{x}_g$ from any point in $\vec{x}$.
-This convergence is asymptotic as long as $k_d \geq 0$ and $\k_s \geq 0$ and the robot has a positive mass.
+This convergence is asymptotic as long as $k_d \geq 0$ and $k_s \geq 0$ and the robot has a positive mass.
 Further, even if we move $\vec{x}_g$, the system will actively track this point. The importance of this result
 cannot be understated, by simply choosing a spring and damper control law, we can drive our system to any
 desired goal state from any initial state. We note that with our current formulation, the path towards the goal
@@ -65,6 +66,9 @@ dynamical systems depending on our needs.
 
 **how DMPs address these limitations by given us more flexibility over path traveled and speed along the path**
 
+$$
+    \vec{x} = \mathbf{x}
+$$
 
 ### Canonical System
 
