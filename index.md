@@ -1,6 +1,6 @@
 ---
-layout: default
-math: true
+layout: forward
+target: https://manipulation-notes.github.io/
 ---
 #### [Nima Fazeli](https://www.mmintlab.com/people/nima-fazeli/)
 
